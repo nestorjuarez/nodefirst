@@ -2,16 +2,23 @@ const express = require('express');
 const config = require('config');
 const morgan = require('morgan');
 const logger = require('./logger');
+const debug = require('debug');
 const Joi = require('joi');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
-app.use(morgan('tiny'));
+if(app.get('env') === 'development')
+{
+  app.use(morgan('tiny'));
+  console.log('morgan habilitado');
+}
 app.use(logger);
 
 console.log("Aplicacion: "+config.get('nombre'));
-console.log("BD server: "+config.get('configDB.host'))
+console.log("BD server: "+config.get('configDB.host'));
+
+
 const usuarios = [{"id":1,"first_name":"Rosabel","last_name":"Oakley","email":"roakley0@linkedin.com"},
 {"id":2,"first_name":"Trudi","last_name":"Burless","email":"tburless1@sohu.com"},
 {"id":3,"first_name":"Auberta","last_name":"Naptine","email":"anaptine2@howstuffworks.com"},
