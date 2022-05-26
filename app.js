@@ -42,7 +42,7 @@ const usuarios = [{"id":1,"first_name":"Rosabel","last_name":"Oakley","email":"r
 
 
 app.get('/', (req, res) => {
-  res.send('Hola bienvenido al adm usuarios');
+  res.send('Hola bienvenido al adm usuarios en heroku');
 });
 
 app.get('/api/usuarios', (req, res)=>{
