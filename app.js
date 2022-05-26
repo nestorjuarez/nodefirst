@@ -1,8 +1,9 @@
+const inicioDebug = require('debug')('app:inicio');
+const dbDebug = require('debug')('app:db')
 const express = require('express');
 const config = require('config');
 const morgan = require('morgan');
 const logger = require('./logger');
-const debug = require('debug');
 const Joi = require('joi');
 const app = express();
 app.use(express.json());
@@ -11,8 +12,12 @@ app.use(express.static('public'));
 if(app.get('env') === 'development')
 {
   app.use(morgan('tiny'));
-  console.log('morgan habilitado');
+  // console.log('morgan habilitado');
+  inicioDebug('Morgan esta habilitado');
 }
+
+//Trabajo con la base de datos
+dbDebug('Conectando con la base de datos');
 app.use(logger);
 
 console.log("Aplicacion: "+config.get('nombre'));
